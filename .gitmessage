@@ -1,0 +1,27 @@
+# Commit Message Template for Livox Mid-360 Docker Project
+#
+# Format: <type>: <subject>
+#
+# Types:
+#   [FEAT]     New feature
+#   [FIX]      Bug fix
+#   [DOCS]     Documentation changes
+#   [CONFIG]   Configuration changes (Dockerfile, docker-compose, configs)
+#   [LAUNCH]   Launch file changes
+#   [REFACTOR] Code refactoring
+#   [TEST]     Test additions or changes
+#   [CHORE]    Maintenance tasks
+#
+# Subject: Brief description (50 chars or less)
+# Body: Detailed explanation (wrap at 72 chars)
+# Footer: Reference issues, breaking changes, etc.
+#
+# Example:
+# feat: add multi-lidar support to driver launch file
+#
+# - Added configuration for multiple Mid-360 units
+# - Updated MID360_config.json with array support
+# - Modified launch file to handle multi_topic parameter
+#
+# Closes #123
+

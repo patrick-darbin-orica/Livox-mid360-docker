@@ -1,0 +1,48 @@
+# Docker ignore file for Livox Mid-360 project
+
+# Git files
+.git
+.gitignore
+.gitattributes
+
+# Documentation
+*.md
+!README.md
+
+# Data files
+data/
+*.bag
+*.db3
+*.pcd
+*.ply
+
+# Build artifacts
+build/
+install/
+log/
+*.o
+*.so
+*.a
+
+# Python cache
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+.pytest_cache/
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Temporary files
+*.tmp
+*.log
+*.bak

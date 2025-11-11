@@ -1,0 +1,60 @@
+version: '3.8'
+
+services:
+  livox_mid360:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: livox-mid360-jetson-orin:latest
+    container_name: livox_mid360_container
+
+    # Use host network for LiDAR communication
+    network_mode: host
+
+    # Enable NVIDIA GPU support
+    runtime: nvidia
+
+    # Privileged mode for device access
+    privileged: true
+
+    # Environment variables
+    environment:
+      - DISPLAY=${DISPLAY}
+      - ROS_DOMAIN_ID=0
+      - RMW_IMPLEMENTATION=rmw_fastrtps_cpp
+      - NVIDIA_VISIBLE_DEVICES=all
+      - NVIDIA_DRIVER_CAPABILITIES=all
+
+    # Volume mounts
+    volumes:
+      # X11 for GUI applications (RViz2)
+      - /tmp/.X11-unix:/tmp/.X11-unix:rw
+      - ${HOME}/.Xauthority:/root/.Xauthority:rw
+
+      # Share configuration files
+      - ./config:/root/livox_ws/config:rw
+      - ./launch:/root/livox_ws/launch:rw
+
+      # Data storage for rosbag recordings
+      - ./data:/root/livox_ws/data:rw
+
+      # Device access
+      - /dev:/dev:rw
+
+    # Device mappings
+    devices:
+      - /dev/video0:/dev/video0  # Optional: camera device
+
+    # Keep container running
+    stdin_open: true
+    tty: true
+
+    # Restart policy
+    restart: unless-stopped
+
+    # Command to run on start
+    command: /bin/bash
+
+networks:
+  default:
+    driver: bridge
