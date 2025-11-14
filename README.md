@@ -31,7 +31,8 @@ This Docker setup provides a complete environment for working with the Livox Mid
 ### Platform Specifications
 
 - **Supported Platform**: NVIDIA Jetson Orin (AGX Orin, Orin NX, Orin Nano)
-- **Operating System**: Ubuntu 22.04 LTS (via JetPack 5.x)
+- **Operating System**: Ubuntu 22.04 LTS
+- **JetPack Version**: JetPack 6.0 (L4T R36.x)
 - **ROS Distribution**: ROS2 Humble
 - **Architecture**: ARM64 (aarch64)
 - **Docker**: NVIDIA Container Runtime required
@@ -43,12 +44,13 @@ This Docker setup provides a complete environment for working with the Livox Mid
 ### 1. Jetson Orin Setup
 
 Ensure your Jetson Orin is running:
-- **JetPack 5.x** (includes Ubuntu 22.04)
-- **L4T r35.x** (Linux for Tegra)
+- **JetPack 6.0** (includes Ubuntu 22.04)
+- **L4T R36.x** (Linux for Tegra)
 
 Check your version:
 ```bash
 cat /etc/nv_tegra_release
+# Should show: R36 (release), REVISION: x.x
 ```
 
 ### 2. Install NVIDIA Container Runtime

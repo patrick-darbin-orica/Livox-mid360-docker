@@ -1,8 +1,9 @@
 # Dockerfile for Livox Mid-360 LiDAR on Jetson Orin
 # Base: NVIDIA L4T (Linux for Tegra) with CUDA support
 # Target: Ubuntu 22.04, ROS2 Humble, ARM64 architecture
+# JetPack 6.0 (L4T R36.x)
 
-FROM nvcr.io/nvidia/l4t-base:r35.4.1
+FROM nvcr.io/nvidia/l4t-base:r36.2.0
 
 # Set environment variables
 ENV DEBIAN_FRONTEND=noninteractive
