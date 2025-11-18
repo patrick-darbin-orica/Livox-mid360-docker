@@ -67,8 +67,8 @@ RUN mkdir -p ${WORKSPACE}/src
 WORKDIR ${WORKSPACE}/src
 RUN git clone https://github.com/Livox-SDK/livox_ros_driver2.git
 
-# Clone FAST-LIO
-RUN git clone --recursive https://github.com/hku-mars/FAST_LIO.git
+# Clone FAST-LIO ROS2 version
+RUN git clone --recursive https://github.com/Ericsii/FAST_LIO_ROS2.git FAST_LIO
 
 # Install FAST-LIO dependencies
 RUN apt-get update && apt-get install -y \

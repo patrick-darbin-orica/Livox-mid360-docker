@@ -56,13 +56,17 @@ cat /etc/nv_tegra_release
 ### 2. Install NVIDIA Container Runtime
 
 ```bash
-# Add NVIDIA Docker repository
-distribution=$(. /etc/os-release;echo $ID$VERSION_ID)
-curl -s -L https://nvidia.github.io/nvidia-docker/gpgkey | sudo apt-key add -
-curl -s -L https://nvidia.github.io/nvidia-docker/$distribution/nvidia-docker.list | \
-  sudo tee /etc/apt/sources.list.d/nvidia-docker.list
+# Add NVIDIA Container Toolkit GPG key (modern method)
+curl -fsSL https://nvidia.github.io/libnvidia-container/gpgkey | \
+  sudo gpg --dearmor -o /usr/share/keyrings/nvidia-container-toolkit-keyring.gpg
 
-# Install nvidia-docker2
+# Add NVIDIA Container Toolkit repository
+distribution=$(. /etc/os-release;echo $ID$VERSION_ID)
+curl -s -L https://nvidia.github.io/libnvidia-container/$distribution/libnvidia-container.list | \
+  sed 's#deb https://#deb [signed-by=/usr/share/keyrings/nvidia-container-toolkit-keyring.gpg] https://#g' | \
+  sudo tee /etc/apt/sources.list.d/nvidia-container-toolkit.list
+
+# Update package list and install nvidia-docker2
 sudo apt-get update
 sudo apt-get install -y nvidia-docker2
 
@@ -70,10 +74,12 @@ sudo apt-get install -y nvidia-docker2
 sudo systemctl restart docker
 
 # Verify installation
-docker info | grep -i runtime
+sudo docker info | grep -i runtime
 ```
 
 You should see `nvidia` in the runtimes list.
+
+**Note**: This method uses the modern GPG keyring approach instead of the deprecated `apt-key` command, and automatically uses the correct repository for Ubuntu 22.04.
 
 ### 3. Install Docker Compose (if not already installed)
 
@@ -97,7 +103,7 @@ sudo apt-get install -y docker-compose
 
 - **Livox Mid-360 LiDAR**
 - Ethernet cable (CAT5e or better)
-- Power supply for Mid-360 (12V DC, provided with LiDAR)
+- Power supply for Mid-360 (24V DC, provided with LiDAR)
 
 ---
 
@@ -172,13 +178,14 @@ You should see successful ping responses if the LiDAR is powered and connected.
 ### 1. Clone or Navigate to Project Directory
 
 ```bash
-cd "/home/patrick/Scripts/Livox Lidar"
+cd /home/user/Programs/Livox-mid360-docker
 ```
 
 ### 2. Build the Docker Image
 
 ```bash
-./build.sh
+chmod +x build.sh
+sudo ./build.sh
 ```
 
 This will:
@@ -504,7 +511,7 @@ Recorded data is stored in the `data/` directory which is mounted from the host:
 
 ```bash
 # On host (outside container)
-ls -lh "/home/patrick/Scripts/Livox Lidar/data/"
+ls -lh /home/user/Programs/Livox-mid360-docker/data/
 ```
 
 You can copy files from here for processing on other systems.

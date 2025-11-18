@@ -34,7 +34,7 @@ def generate_launch_description():
         output='screen',
         parameters=[{
             'user_config_path': LaunchConfiguration('config_file'),
-            'xfer_format': 1,
+            'xfer_format': 0,
             'multi_topic': 0,
             'data_src': 0,
             'publish_freq': 10.0,
@@ -42,11 +42,7 @@ def generate_launch_description():
             'frame_id': 'livox_frame',
             'lidar_bag': '',
             'cmdline_bd_code': 'livox0000000001'
-        }],
-        remappings=[
-            ('/livox/lidar', '/livox/pointcloud'),
-            ('/livox/imu', '/livox/imu')
-        ]
+        }]
     )
 
     # FAST-LIO node

@@ -28,12 +28,12 @@ xhost +local:docker > /dev/null 2>&1 || echo -e "${YELLOW}Warning: Could not con
 
 # Check network interface
 echo -e "${GREEN}Checking network configuration...${NC}"
-if ip addr show | grep -q "192.168.1.5"; then
-    echo -e "${GREEN}Network interface configured correctly (192.168.1.5)${NC}"
+if ip addr show | grep -q "192.168.1.50"; then
+    echo -e "${GREEN}Network interface configured correctly (192.168.1.50)${NC}"
 else
-    echo -e "${YELLOW}Warning: Static IP 192.168.1.5 not detected.${NC}"
+    echo -e "${YELLOW}Warning: Static IP 192.168.1.50 not detected.${NC}"
     echo "Please configure your network interface with:"
-    echo "  IP: 192.168.1.5"
+    echo "  IP: 192.168.1.50"
     echo "  Subnet: 255.255.255.0"
     echo ""
     echo "Continue anyway? (y/n)"
